@@ -1,0 +1,211 @@
+/* ── Nexa Atelier · sistema documento preventivo ───────────────────────── */
+
+@page { size: A4; margin: 0; }
+
+:root{
+  /* palette */
+  --crema:#F4EFE5;
+  --bordeaux:#701017;
+  --inchiostro:#0F0F0E;
+  --corpo:#4A4540;
+  --filetto-scuro:rgba(74,69,64,0.42);
+  --filetto-chiaro:rgba(74,69,64,0.20);
+
+  /* griglia */
+  --margine:22mm;
+  --filetto:0.5pt;
+
+  /* ritmo verticale — unica manopola di densità del documento */
+  --h-logo:22mm;
+  --gap-logo:4.5mm;
+  --gap-sezione:3.0mm;
+  --pad-riga:0.9mm;
+  --pad-riepilogo:0.9mm;
+
+  /* scala tipografica */
+  --fs-corpo:9pt;
+  --fs-dettaglio:7.1pt;
+  --fs-etichetta:6.6pt;
+  --fs-nota:7.3pt;
+  --fs-pie:7.1pt;
+  --fs-titolo:17.5pt;
+  --fs-totale:13.5pt;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{background:var(--crema)}
+
+body{
+  color:var(--corpo);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:var(--fs-corpo);
+  line-height:1.34;
+  -webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums lining-nums;
+}
+
+.foglio{
+  width:210mm;
+  height:297mm;
+  padding:var(--margine);
+  background:var(--crema);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── primitive tipografiche ───────────────────────────────────────────── */
+
+.etichetta{                       /* maiuscoletto per colonne e micro-titoli */
+  font-weight:600;
+  font-size:var(--fs-etichetta);
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  line-height:1.2;
+  color:var(--corpo);
+}
+
+.cifra{                           /* ogni importo del documento */
+  font-family:'EB Garamond',Georgia,serif;
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:"tnum" 1,"lnum" 1;
+  font-size:10pt;
+  text-align:right;
+  white-space:nowrap;
+  color:var(--inchiostro);
+}
+
+/* ── intestazione ─────────────────────────────────────────────────────── */
+
+.logo{display:block;align-self:flex-start;height:var(--h-logo);width:auto;margin-bottom:var(--gap-logo)}
+
+.riga-testata{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding-bottom:1.8mm;
+  border-bottom:var(--filetto) solid var(--bordeaux);
+}
+
+/* ── titolo evento ────────────────────────────────────────────────────── */
+
+.evento{margin-top:var(--gap-sezione)}
+
+.evento h1{
+  font-family:'EB Garamond',Georgia,serif;
+  font-weight:400;
+  font-size:var(--fs-titolo);
+  line-height:1.06;
+  letter-spacing:0.004em;
+  color:var(--inchiostro);
+}
+
+.evento .coordinate{margin-top:1.6mm;color:var(--corpo)}
+
+/* ── blocco cliente ───────────────────────────────────────────────────── */
+
+.dati{
+  display:grid;
+  grid-template-columns:0.92fr 1.28fr 0.8fr;
+  gap:0 7mm;
+  margin-top:var(--gap-sezione);
+  padding-top:2.2mm;
+  border-top:var(--filetto) solid var(--filetto-scuro);
+}
+
+.dati .etichetta{display:block;margin-bottom:1mm}
+.dati .valore{color:var(--inchiostro);line-height:1.32}
+.dati .valore span{display:block}
+
+/* ── sezioni tabellari ────────────────────────────────────────────────── */
+
+.sezione{margin-top:var(--gap-sezione)}
+
+.sezione > .titolo,
+.condizioni > .titolo{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding-bottom:1.4mm;
+  border-bottom:var(--filetto) solid var(--bordeaux);
+}
+.sezione > .titolo .etichetta:first-child{color:var(--inchiostro)}
+
+table{width:100%;border-collapse:collapse}
+
+
+tbody tr:first-child td{padding-top:1.8mm}
+tbody td{
+  padding:var(--pad-riga) 0;
+  vertical-align:top;
+  border-bottom:var(--filetto) solid var(--filetto-chiaro);
+}
+tbody tr:last-child td{border-bottom:none}
+
+td .voce{color:var(--inchiostro)}
+td .dettaglio{display:block;margin-top:0.3mm;font-size:var(--fs-dettaglio);line-height:1.26;color:var(--corpo)}
+
+col.c-importo{width:32mm}
+
+/* ── riepilogo economico ──────────────────────────────────────────────── */
+
+.riepilogo{margin-top:var(--gap-sezione);display:flex;justify-content:flex-end}
+.riepilogo table{width:86mm}
+.riepilogo td{padding:var(--pad-riepilogo) 0;border-bottom:var(--filetto) solid var(--filetto-chiaro)}
+.riepilogo td.et{color:var(--corpo);font-size:8.4pt;line-height:1.3}
+
+.riepilogo tr.totale td{
+  padding-top:1.9mm;
+  border-top:var(--filetto) solid var(--bordeaux);
+  border-bottom:none;
+  vertical-align:middle;
+}
+.riepilogo tr.totale td.et{
+  font-weight:600;font-size:var(--fs-etichetta);
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--bordeaux);
+}
+.riepilogo tr.totale .cifra{font-size:var(--fs-totale);font-weight:600;color:var(--bordeaux);line-height:1}
+
+.nota-iva{
+  margin:1.6mm 0 0 auto;max-width:86mm;
+  text-align:left;font-size:var(--fs-nota);line-height:1.32;color:var(--corpo);
+}
+
+/* ── condizioni ───────────────────────────────────────────────────────── */
+
+.condizioni{margin-top:var(--gap-sezione)}
+.condizioni .griglia{
+  margin-top:2.4mm;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2.4mm 9mm;
+}
+.condizioni .etichetta{display:block;margin-bottom:0.9mm}
+.condizioni p{font-size:var(--fs-nota);line-height:1.32;color:var(--corpo)}
+
+/* ── accettazione ─────────────────────────────────────────────────────── */
+
+.accettazione{
+  margin-top:auto;padding-top:2.4mm;
+  border-top:var(--filetto) solid var(--bordeaux);
+  display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:0 9mm;
+}
+.accettazione .linea{height:6mm;border-bottom:var(--filetto) solid var(--filetto-scuro)}
+.accettazione .etichetta{display:block;margin-top:1.3mm}
+
+/* ── piè di pagina ────────────────────────────────────────────────────── */
+
+.pie{
+  margin-top:3.5mm;padding-top:2.4mm;
+  border-top:var(--filetto) solid var(--filetto-chiaro);
+  display:flex;justify-content:space-between;align-items:baseline;gap:6mm;
+  font-size:var(--fs-pie);line-height:1.3;
+}
+.pie .ragione{color:var(--inchiostro)}
+.pie span + span::before{content:"·";margin:0 1.5mm;color:var(--filetto-scuro)}
+
+@media print{
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .foglio{margin:0}
+}
