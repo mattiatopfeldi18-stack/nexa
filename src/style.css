@@ -16,7 +16,7 @@
   --filetto:0.5pt;
 
   /* ritmo verticale — unica manopola di densità del documento */
-  --h-logo:22mm;
+  --h-logo:30mm;
   --gap-logo:4.5mm;
   --gap-sezione:3.0mm;
   --pad-riga:0.9mm;
@@ -76,6 +76,17 @@ body{
   color:var(--inchiostro);
 }
 
+.vuoto{                           /* campo da completare, non un segnaposto di testo */
+  display:inline-block;
+  min-width:32mm;
+  border-bottom:var(--filetto) solid var(--bordeaux);
+  vertical-align:baseline;
+}
+.cifra .vuoto,td.cifra .vuoto{min-width:24mm}
+.condizioni p .vuoto{min-width:100%;margin-top:2.6mm}
+.nota-iva .vuoto{min-width:100%}
+.pie .vuoto{min-width:22mm}
+
 /* ── intestazione ─────────────────────────────────────────────────────── */
 
 .logo{display:block;align-self:flex-start;height:var(--h-logo);width:auto;margin-bottom:var(--gap-logo)}
@@ -115,7 +126,7 @@ body{
 }
 
 .dati .etichetta{display:block;margin-bottom:1mm}
-.dati .valore{color:var(--inchiostro);line-height:1.32}
+.dati .valore{color:var(--inchiostro);line-height:1.32;padding-bottom:1.2mm}
 .dati .valore span{display:block}
 
 /* ── sezioni tabellari ────────────────────────────────────────────────── */

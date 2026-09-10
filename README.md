@@ -31,5 +31,22 @@ quel volume si accorciano le note: il corpo del testo non scende sotto i 9 pt.
 ## Font
 
 `assets/fonts/fonts-inline.css` è generato da `build/inline_fonts.py`, che
-scarica i subset latini di EB Garamond e Inter e li incorpora come data URI.
-Va rigenerato solo per cambiare famiglia o peso.
+scarica EB Garamond e Inter e li incorpora come data URI. Va rigenerato solo
+per cambiare famiglia o peso.
+
+Servono le **istanze statiche**, non i font variabili. Con i variabili
+Chromium ripiega in export sui font Type3, che incorporano i glifi come
+procedure vettoriali anziché come programma di font: stampano, ma il testo
+non resta selezionabile e diverse tipografie li rifiutano. Lo script chiede
+perciò a Google Fonts le versioni WOFF statiche e si ferma se riceve altro.
+Nel PDF prodotto i font compaiono come `CIDFontType2` con `FontFile2`.
+
+## Logo
+
+`build/logo.py` ricava l'asset dall'immagine incorporata nel preventivo
+originale, che è opaca su un fondo off-white e non sul crema del documento.
+Lo script appiattisce quel fondo e ne rimappa il punto di bianco sul colore
+pagina: su un artwork scuro il risultato equivale a un PNG trasparente
+composto sul crema. Se è disponibile il PNG originale con trasparenza,
+sostituirlo in `assets/` è preferibile — l'immagine del PDF porta con sé
+gli artefatti JPEG della sorgente.

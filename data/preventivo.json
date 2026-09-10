@@ -1,0 +1,58 @@
+{
+  "logo": "assets/logo-nexa-atelier.png",
+  "numero": null,
+  "data_emissione": "10 settembre 2026",
+
+  "evento": {
+    "titolo": "Evento di laurea",
+    "coordinate": "27 settembre 2026 · Porter House"
+  },
+
+  "cliente": {
+    "nome": null,
+    "contatto": null,
+    "riferimento": null
+  },
+
+  "servizi_inclusi": [
+    {"voce": "Torta di laurea", "dettaglio": "20 kg", "importo": 650},
+    {"voce": "DJ set", "dettaglio": "Servizio musicale per l'intera durata dell'evento", "importo": 200},
+    {"voce": "Servizio fotografico", "dettaglio": "Copertura fotografica dell'evento", "importo": 250}
+  ],
+
+  "servizi_opzionali": [
+    {"voce": "Tattoo temporanei", "dettaglio": "150 pezzi", "importo": "da € 200, definito a conferma quantità"},
+    {"voce": "Servizio Polaroid", "dettaglio": "150 scatti", "importo": 300}
+  ],
+
+  "riepilogo": {
+    "voci": [
+      {"voce": "Imponibile servizi inclusi", "importo": 1100},
+      {"voce": "Coordinamento e direzione evento", "importo": null}
+    ],
+    "etichetta_totale": "Totale",
+    "totale": null
+  },
+
+  "nota_iva": null,
+  "titolo_condizioni": "Condizioni",
+
+  "condizioni": [
+    {"etichetta": "Validità",
+     "testo": "Il preventivo resta valido 15 giorni dalla data di emissione. Oltre tale termine gli importi e la disponibilità dei fornitori sono soggetti a riconferma."},
+    {"etichetta": "Pagamenti", "testo": null},
+    {"etichetta": "Servizi opzionali",
+     "testo": "I servizi opzionali entrano nel preventivo definitivo solo dopo conferma scritta della cliente. Il totale si aggiorna di conseguenza."},
+    {"etichetta": "Annullamento", "testo": null},
+    {"etichetta": "Incluso e non incluso",
+     "testo": "Il corrispettivo copre i servizi elencati e il coordinamento dell'evento. Restano esclusi location, ristorazione e allestimenti."}
+  ],
+
+  "azienda": {
+    "ragione_sociale": null,
+    "piva": null,
+    "email": null,
+    "telefono": null,
+    "sito": null
+  }
+}

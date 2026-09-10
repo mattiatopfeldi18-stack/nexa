@@ -6,8 +6,13 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 E = lambda s: html.escape(str(s), quote=False)
 
 
+VUOTO = '<span class="vuoto"></span>'          # campo ancora da completare
+
+
 def euro(v):
     """Importo in formato italiano. Le stringhe passano intatte (intervalli, 'da €')."""
+    if v is None:
+        return VUOTO
     if isinstance(v, str):
         return E(v)
     intero, dec = f"{v:,.2f}".split(".")
@@ -52,7 +57,9 @@ def tabella(titolo, voci, intestazione_importo="Importo"):
 
 
 def campo(etichetta, valore):
-    if isinstance(valore, (list, tuple)):
+    if valore is None:
+        valore = VUOTO
+    elif isinstance(valore, (list, tuple)):
         valore = "".join(f"<span>{E(x)}</span>" for x in valore)
     else:
         valore = E(valore)
@@ -61,8 +68,9 @@ def campo(etichetta, valore):
 
 
 def blocco(etichetta, testo):
+    corpo = VUOTO + VUOTO if testo is None else E(testo)
     return f'<div class="blocco"><span class="etichetta">{E(etichetta)}</span>' \
-           f'<p>{E(testo)}</p></div>'
+           f'<p>{corpo}</p></div>'
 
 
 def main():
@@ -80,6 +88,9 @@ def main():
 
     condizioni = "\n".join(blocco(c["etichetta"], c["testo"]) for c in d["condizioni"])
 
+    voci_pie = [("P. IVA ", az["piva"]), ("", az["email"]), ("", az["telefono"]), ("", az["sito"])]
+    pie_contatti = "".join(f"<span>{p}{VUOTO if v is None else E(v)}</span>" for p, v in voci_pie)
+
     doc = f"""<!doctype html>
 <html lang="it">
 <head>
@@ -95,7 +106,7 @@ def main():
   <img class="logo" src="{data_uri(d['logo'])}" alt="Nexa Atelier">
 
   <div class="riga-testata">
-    <span class="etichetta">Preventivo n. {E(d['numero'])}</span>
+    <span class="etichetta">Preventivo n. {VUOTO if d['numero'] is None else E(d['numero'])}</span>
     <span class="etichetta">{E(d['data_emissione'])}</span>
   </div>
 
@@ -118,7 +129,7 @@ def main():
 {chr(10).join(rows)}
     </tbody></table>
   </div>
-  <p class="nota-iva">{E(d['nota_iva'])}</p>
+  <p class="nota-iva">{VUOTO if d['nota_iva'] is None else E(d['nota_iva'])}</p>
 
   <section class="condizioni">
     <div class="titolo"><span class="etichetta">{E(d['titolo_condizioni'])}</span></div>
@@ -130,12 +141,12 @@ def main():
   <section class="accettazione">
     <div class="riga"><div class="linea"></div><span class="etichetta">Luogo</span></div>
     <div class="riga"><div class="linea"></div><span class="etichetta">Data</span></div>
-    <div class="riga"><div class="linea"></div><span class="etichetta">Firma del cliente per accettazione</span></div>
+    <div class="riga"><div class="linea"></div><span class="etichetta">Firma del cliente</span></div>
   </section>
 
   <footer class="pie">
-    <span class="ragione">{E(az['ragione_sociale'])}</span>
-    <div><span>P. IVA {E(az['piva'])}</span><span>{E(az['email'])}</span><span>{E(az['telefono'])}</span><span>{E(az['sito'])}</span></div>
+    <span class="ragione">{VUOTO if az['ragione_sociale'] is None else E(az['ragione_sociale'])}</span>
+    <div>{pie_contatti}</div>
   </footer>
 
 </div>
