@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0E0E10"/>
+  <rect x="9.5" y="5.5" width="45" height="53" fill="none" stroke="#D9C6A5" stroke-width="1.5"/>
+  <g fill="#D9C6A5">
+    <!-- N didone: aste sottili, diagonale piena, grazie piatte -->
+    <path d="M22 17h2.2V47h-2.2z"/>
+    <path d="M39.8 17H42V48h-1.6z"/>
+    <path d="M21.6 17h6.4L42 48h-6.2z"/>
+    <path d="M18 16.2h10v1.4H18zM18 46.4h10.2v1.4H18zM36 16.2h10v1.4H36z"/>
+  </g>
+</svg>
